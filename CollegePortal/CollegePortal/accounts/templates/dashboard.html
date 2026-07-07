@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+    Dashboard
+
+</h2>
+
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-primary text-white card-box">
+
+            <div class="card-body">
+
+                <h5>Total Students</h5>
+
+                <h1>
+
+                    {{ total_students }}
+
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-success text-white card-box">
+
+            <div class="card-body">
+
+                <h5>Departments</h5>
+
+                <h1>
+
+                    {{ departments }}
+
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card bg-warning card-box">
+
+            <div class="card-body">
+
+                <h5>Average CGPA</h5>
+
+                <h1>
+
+                    {{ average_cgpa }}
+
+                </h1>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        Top Performer
+
+    </div>
+
+    <div class="card-body">
+
+        <h3>
+
+            {{ topper.name }}
+
+        </h3>
+
+        <h5>
+
+            CGPA: {{ topper.cgpa }}
+
+        </h5>
+
+        <p>
+
+            Department: {{ topper.department }}
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="card shadow">
+
+    <div class="card-header bg-dark text-white">
+
+        Recent Students
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Department</th>
+
+                    <th>Semester</th>
+
+                    <th>CGPA</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for student in recent_students %}
+
+                <tr>
+
+                    <td>
+
+                        {{ student.name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ student.department }}
+
+                    </td>
+
+                    <td>
+
+                        {{ student.semester }}
+
+                    </td>
+
+                    <td>
+
+                        {{ student.cgpa }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

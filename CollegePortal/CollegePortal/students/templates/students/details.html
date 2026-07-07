@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-info text-white">
+
+                <h3>
+
+                    Student Details
+
+                </h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="text-center mb-4">
+
+                    <i class="bi bi-person-circle"
+                       style="font-size:100px;"></i>
+
+                    <h2>
+
+                        {{ student.name }}
+
+                    </h2>
+
+                </div>
+
+                <table class="table table-bordered">
+
+                    <tr>
+
+                        <th width="30%">
+
+                            Email
+
+                        </th>
+
+                        <td>
+
+                            {{ student.email }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>
+
+                            Phone
+
+                        </th>
+
+                        <td>
+
+                            {{ student.phone }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>
+
+                            Department
+
+                        </th>
+
+                        <td>
+
+                           <span class="badge bg-primary">
+
+    {{ student.department }}
+
+</span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>
+
+                            Semester
+
+                        </th>
+
+                        <td>
+
+                            {{ student.semester }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>
+
+                            CGPA
+
+                        </th>
+
+                        <td>
+
+                           <span class="badge bg-success">
+
+    {{ student.cgpa }}
+
+</span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>
+
+                            City
+
+                        </th>
+
+                        <td>
+
+                            {{ student.city }}
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <a href="{% url 'student_list' %}"
+                   class="btn btn-secondary">
+
+                    Back
+
+                </a>
+
+                <a href="{% url 'edit_student' student.id %}"
+                   class="btn btn-warning">
+
+                    Edit
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
