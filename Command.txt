@@ -1,0 +1,101 @@
+const mg=require("mongoose");
+mg.connect("mongodb://localhost:27017").then(()=>console.log("connection succesful")).catch((e)=>console.log("connection failed",e));
+
+
+const sc=mg.Schema(
+    {
+        sname:String,
+        rollno:Number,
+        gender:String,
+        pass:Boolean,
+        doj:Date,
+        marks:Array,
+        division:Object 
+
+
+    }
+)
+mg.pluralize(null)
+const student=new mg.model("student",sc)
+async function created() {
+    try{
+        const s1=new student(
+            {
+                sname:"oliver",
+        rollno:1,
+        grnder:"Female",
+        pass:true,
+        doj:new Date(),
+        marks:[21,13,18],
+        division:{department:"sy1",class:"A8"}
+            }
+        )
+        const r=await s1.save()
+        console.log("Insert Success",r);
+    }
+    catch(e)
+    {
+        console.log("Insert unsuccess",e)
+    }
+}
+// created()
+var students=[
+    {
+        sname:"bhavya",
+        rollno:2,
+        grnder:"male",
+        pass:true,
+        doj:new Date("2025-05-26"),
+        marks:[22,14,19],
+        division:{department:"sy1",class:"A5"}
+    },
+    {
+    sname:"pricnce",
+        rollno:3,
+        grnder:"male",
+        pass:true,
+        doj:new Date(),
+        marks:[25,16,9],
+        division:{department:"sy1",class:"A8"}
+    }
+    
+]
+const createm=async()=>{
+        try{
+            const r1=await student.insertMany(students)
+            console.log("Insert success",r1)
+        }
+        catch (e)
+        {
+            console.log("Insert unsuccess",e)
+        }
+    }
+    //createm()
+    const operations=async()=>
+    {
+        try{
+            var fs=await student.find({sname:"oliver"})
+            console.log(fs)
+        }
+        catch(e)
+        {
+             console.log("Insert unsuccess",e)
+        }
+    }
+    async function Operation() {
+        try{
+            var res=[];
+            res.push(await student.findOne())
+                        res.push(await student.find({rollno:{$lt:18}}))
+
+            console.log("Result is",res)
+        }
+        catch(e)
+        {
+            console.log("Operation failed",e)
+        }
+
+        
+    }
+
+            Operation()
