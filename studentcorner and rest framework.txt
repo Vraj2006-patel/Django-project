@@ -1,0 +1,178 @@
+urls.py ma
+ path('students/add/', views.add,name='add'),
+
+views.py ma
+def add(request):
+    if request.method == 'GET':
+        return render(request,'add.html')
+    else:
+        student= Student()
+        student.name=request.POST['name']
+        student.branch=request.POST['branch']
+        student.sem=request.POST['sem']
+        student.email=request.POST['email']
+        student.save()
+        return redirect('students')
+list.html ma 5 mi line path 
+<a href="{% url 'add' %}">
+    
+add.html banavo ama
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Add Student</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    Name:
+    <input type="text" name="name"><br><br>
+
+    Branch:
+    <input type="text" name="branch"><br><br>
+
+    Semester:
+    <input type="number" name="semester"><br><br>
+
+    Email:
+    <input type="email" name="email"><br><br>
+
+    <input type="submit" value="Save">
+
+</form>
+
+{% endblock %}
+
+list.html ma
+     <td>{{ student.sem }}</td>
+add.html ma 
+   Semester:
+    <input type="number" name="sem"><br><br>
+
+views.py ma
+def edit(request,id):
+    student = Student.objects.get(id=id)
+    if request.method == 'GET':
+        return render(request,'edit.html',{'student':student})
+    else:
+        student= Student()
+        student.name=request.POST['name']
+        student.branch=request.POST['branch']
+        student.sem=request.POST['sem']
+        student.email=request.POST['email']
+        student.save()
+        return redirect('students')
+new file templates edit.html ma
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Student</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    Name:
+    <input type="text"
+           name="name"
+           value="{{ student.name }}">
+    <br><br>
+
+    Branch:
+    <input type="text"
+           name="branch"
+           value="{{ student.branch }}">
+    <br><br>
+
+    Semester:
+    <input type="number"
+           name="semester"
+           value="{{ student.semester }}">
+    <br><br>
+
+    Email:
+    <input type="email"
+           name="email"
+           value="{{ student.email }}">
+    <br><br>
+
+    <input type="submit" value="Update">
+
+</form>
+
+{% endblock %}
+
+edit.html ma
+ <a href="{% url 'edit' id=student.id %}">
+  Edit
+            </a>
+
+
+views.py ma
+    path('students/<int:id>/edit/',views.edit,name='edit'),
+               
+
+
+edit.html ma sudhar
+ Semester:
+    <input type="number"
+           name="sem"
+           value="{{ student.sem}}">
+    <br><br>
+
+
+urls.py ma
+ path('students/<int:id>/delete/',views.delete,name='delete'),
+
+views.py ma
+   def delete(request,id):
+    student = Student.objects.get(id=id)
+    student.delete()
+    return redirect('students')       
+
+list.html ma
+ <a href="{% url 'delete' id=student.id %}">
+                Delete
+            </a>
+rar file banavavi learn
+
+github.com/kavit88/ mathi college portal
+ ni rar file upload karo teen sada ma convwert
+college portal
+cd .\CollegePortal\
+python manage.py createsuperuser
+python manage.py runserver    
+then serializers.py create students ma
+
+settings.py ma
+ 'django.contrib.staticfiles',
+    'accounts',
+    'students',
+    'rest_framework'=> aa add karvu
+
+pachhi serializer.py ma
+from rest_framework import serializers
+from .models import Student
+
+view.py ma
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from rest_framework.viewsets import ModelViewSet
+from .serializers import StudentSerializers
+
+class StudentViewSet(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class= StudentSerializers
+@login_required
+
+students folder ma api_urls file create
+them main college portal ni urls.py ma
+
+
+
+
+
+

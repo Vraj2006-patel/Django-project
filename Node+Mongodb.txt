@@ -1,0 +1,127 @@
+npm set proxy  http://192.168.10.251:808
+
+npm install mongoose
+
+npm install validator
+
+T4 ma m1.js
+
+
+3 progrrams
+
+node+mongodb
+express+mongodb
+
+react+mongodb
+
+//1.Require Mongoose
+//2.Connect Mongodb
+//3. Create a schema (reqire for crud operation)
+const sc=mg.Schema(
+    {sname:String,
+     rollno:Number,
+     gender:String,
+     pass:Boolean,
+     doj:Date,
+     marks:Array,
+     division:Object   
+    }
+);
+//2.Connect Mongodb mongodb compass ma copy connection string
+mg.connect("mongodb://localhost:27017")
+.then(()=>console.log("Connection Successful"))
+.catch((e)=>console.log("Connection failed",e));
+ aatlu karya pachhi terminal ma node m1.js
+
+
+//4.Create a Model(table)
+mg.pluralize(null)
+const student=new mg.model("student",sc)
+
+//5.Do operations
+async function created()
+{
+    try{
+        //Instance Method
+    const s1=new student(
+    {
+        sname:"Oliver",
+        rollno:1,
+        gender:"Female",
+        pass:true,
+        doj:new Date(),
+        marks:[21,23,18],
+        division:{department:"SY1",class:"A8"} 
+    }    
+    );
+const r= await s1.save()
+console.log("Insert Success",r);
+    }
+    catch(e)
+    {
+        console.log("Cannot Insert",e)
+    }
+}
+created()
+ana pachhi terminal ma node m1.js
+ma output male
+D:\T4>node m1.js           
+Connection Successful
+Insert Success {
+  sname: 'Oliver',
+  rollno: 1,
+  gender: 'Female',
+  pass: true,
+  doj: 2026-07-03T07:21:47.646Z,
+  marks: [ 21, 23, 18 ],
+  division: { department: 'SY1', class: 'A8' },
+  _id: new ObjectId('6a47630b5108eb0863e519e1'),
+  __v: 0
+}
+
+//class based method
+// 1 findone
+// 2 find
+// 3 insertMany
+// 4 updateOne
+// 5 UpdateMany
+// 6 deleteOne
+// 7 deleteMany
+// 8 countDocuments
+// 9 findByIdAndUpdate
+// 10 findByIdAndUpdate
+
+var students=[
+    {
+        sname:"Henry",rollno:25,gender:"Male",pass:false,doj:new Date("2025-05-26"),
+        marks:[17,16,21], division:{department:"SY1",class:"A2"}
+    },
+    {
+        sname:"Jency",rollno:182,gender:"Female",pass:true,doj:new Date(),
+        marks:[24,14,12], division:{department:"SY1",class:"A5"}
+    },    
+    {
+        sname:"Riya",rollno:184,gender:"Female",pass:true,doj:new Date(),
+        marks:[20,10,15], division:{department:"SY1",class:"A7"}
+    },
+    {
+        sname:"Joy",rollno:82,gender:"Male",pass:true,doj:new Date(),
+        marks:[12,23,20], division:{department:"SY1",class:"A5"}
+    }    
+] 
+const createm=async()=>{
+    try{
+    const r1=await student.insertMany(students)
+    console.log("Insert success",r1)
+    }
+
+catch(e)
+{
+    console.log("Cannot Insert",e)
+}
+}
+createm();
+
+
+
+
