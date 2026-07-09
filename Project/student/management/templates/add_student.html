@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Student</h2>
+
+<!-- This block will display data errors on your screen -->
+{% if form.errors %}
+    <div style="color: red; border: 2px solid red; padding: 15px; margin-bottom: 20px; background-color: #ffe6e6;">
+        <strong>Form Validation Failed:</strong>
+        <ul>
+        {% for field, errors in form.errors.items %}
+            <li><strong>{{ field }}:</strong> {{ errors|striptags }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<form method="POST" action="{% url 'add_student' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="padding: 5px 15px; cursor: pointer;">Save Student</button>
+</form>
+<br>
+<p><a href="{% url 'student_list' %}">Back to List</a></p>
+{% endblock %}

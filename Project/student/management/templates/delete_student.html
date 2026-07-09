@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Delete Student</h2>
+<p>Are you sure you want to permanently delete the record for <strong>{{ student.name }}</strong>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" style="background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer;">Yes, Delete</button>
+    <a href="{% url 'student_list' %}" style="margin-left: 10px;">Cancel</a>
+</form>
+{% endblock %}

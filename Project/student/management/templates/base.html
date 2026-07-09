@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information System</title>
+</head>
+<body>
+    <h1>Student Information System</h1>
+    <hr>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> | 
+        <a href="{% url 'about' %}">About</a> | 
+        {% if user.is_authenticated %}
+            <a href="{% url 'student_list' %}">Students</a> | 
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> | 
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
